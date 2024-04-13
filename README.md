@@ -1,6 +1,3 @@
-Here's the README file for your Decentralized Campus Attendance project:
-
----
 
 # Decentralized Campus Attendance - README
 
@@ -142,8 +139,4 @@ For example, you can call the `create_lecture` function with the required lectur
     * Evaluates student time spent on campus based on attendance data.
     * Provides a reference for checking student attendance and monitoring lecturer activity.
 
-**Note:** Further details such as application usage instructions, contribution guidelines, and license information can be added as needed.
 
----
-
-Feel free to enhance this README with additional information specific to your project's requirements or audience.
