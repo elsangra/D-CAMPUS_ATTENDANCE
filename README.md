@@ -60,6 +60,74 @@ Ensure the following prerequisites are met on your Linux system:
     dfx deploy
     ```
 
+# Student Attendance Canister
+
+This is a canister for managing student attendance in lectures. It provides functions to create lectures, finalize attendance, delete lectures, and retrieve lecture details.
+
+## Functions
+
+### `get_lecture`
+
+Retrieves details of a lecture by its ID.
+
+#### Input
+
+- `id`: The ID of the lecture to retrieve.
+
+#### Output
+
+- `Lecture`: Details of the lecture.
+
+### `create_lecture`
+
+Creates a new lecture with the provided details.
+
+#### Input
+
+- `lecture`: Details of the lecture to create.
+
+#### Output
+
+- `Option<Lecture>`: The created lecture if successful.
+
+### `finalize_lecture`
+
+Finalizes a lecture by updating its end time and attendance details.
+
+#### Input
+
+- `id`: The ID of the lecture to finalize.
+- `payload`: Updated attendance details.
+
+#### Output
+
+- `Result<Lecture, Error>`: The finalized lecture if successful.
+
+### `delete_lecture`
+
+Deletes a lecture by its ID.
+
+#### Input
+
+- `id`: The ID of the lecture to delete.
+
+#### Output
+
+- `Result<Lecture, Error>`: The deleted lecture if successful.
+
+## Accessing Functions on Candid UI
+
+You can access these functions on the Candid UI by deploying this canister and interacting with it using its generated interface description file (`student_attendance_backend.did`). Here's how you can use the functions:
+
+1. **Deploy the Canister**: Deploy the canister to the Internet Computer.
+2. **Generate the Interface Description File**: Use the `candid-extractor` tool to generate the interface description file (`student_attendance_backend.did`) from the compiled WASM file.
+3. **Import the Interface on Candid UI**: Go to the Candid UI (https://ic.rocks/candid) and import the interface description file.
+4. **Interact with Functions**: Once imported, you can see the available functions and their inputs. You can call these functions with appropriate inputs to interact with the canister.
+
+For example, you can call the `create_lecture` function with the required lecture details to create a new lecture. Similarly, you can call other functions to retrieve, finalize, or delete lectures.
+
+
+
 **Project Functionality**
 
 * **Attendance Tracking:**

@@ -1,30 +1,72 @@
-type Error = variant { NotFound : record { msg : text } };
+type AttendanceRecord = record {
+  id : nat64;
+  student_id : nat64;
+  attendance_status : text;
+};
+type Error = variant {
+  InvalidInput : record { msg : text };
+  NotFound : record { msg : text };
+};
 type Lecture = record {
   id : nat64;
-  number_of_partial_attendance : nat64;
-  lecturer_name : text;
-  number_of_full_attend : nat64;
-  unit_code : text;
-  unit_name : text;
-  stop_time : opt nat64;
-  start_time : nat64;
-  lecture_hall_no : nat64;
-  lecturer_id : text;
+  topic : text;
+  multimedia_content : opt MultiMediaContent;
+  date_time : nat64;
+  student_id : nat64;
+  lecturer_id : nat64;
 };
-type LecturePayload = record {
-  number_of_partial_attendance : nat64;
-  lecturer_name : text;
-  number_of_full_attend : nat64;
-  unit_code : text;
-  unit_name : text;
-  lecture_hall_no : nat64;
-  lecturer_id : text;
+type Message = record {
+  id : nat64;
+  receiver_id : nat64;
+  content : text;
+  multimedia_content : opt MultiMediaContent;
+  sender_id : nat64;
 };
-type Result = variant { Ok : Lecture; Err : Error };
+type MultiMediaContent = record {
+  image_url : opt text;
+  audio_url : opt text;
+  video_url : opt text;
+};
+type Result = variant { Ok; Err : Error };
+type Result_1 = variant { Ok : AttendanceRecord; Err : Error };
+type Result_2 = variant { Ok : Lecture; Err : Error };
+type Result_3 = variant { Ok : Student; Err : Error };
+type Result_4 = variant { Ok : Message; Err : Error };
+type Student = record {
+  id : nat64;
+  name : text;
+  contact_details : text;
+  attendance_history : text;
+};
 service : {
-  create_lecture : (LecturePayload) -> (opt Lecture);
+  delete_attendance_record : (nat64) -> (Result);
   delete_lecture : (nat64) -> (Result);
-  finalize_lecture : (nat64, LecturePayload) -> (Result);
-  get_lecture : (nat64) -> (Result) query;
+  delete_message : (nat64) -> (Result);
+  delete_student : (nat64) -> (Result);
+  get_attendance_record : (nat64) -> (Result_1) query;
+  get_lecture : (nat64) -> (Result_2) query;
+  get_student : (nat64) -> (Result_3) query;
+  list_attendance_records : () -> (vec AttendanceRecord) query;
+  list_lectures : () -> (vec Lecture) query;
+  list_messages : () -> (vec Message) query;
+  list_students : () -> (vec Student) query;
+  register_student : (text, text, text) -> (Result_3);
+  schedule_lecture : (nat64, nat64, nat64, text, opt MultiMediaContent) -> (
+      Result_2,
+    );
+  send_reminder_to_student : (nat64, text, opt MultiMediaContent) -> (Result_4);
+  update_attendance_record : (nat64, nat64, text) -> (Result_1);
+  update_lecture : (
+      nat64,
+      nat64,
+      nat64,
+      nat64,
+      text,
+      opt MultiMediaContent,
+    ) -> (Result_2);
+  update_message : (nat64, nat64, nat64, text, opt MultiMediaContent) -> (
+      Result_4,
+    );
+  update_student : (nat64, text, text, text) -> (Result_3);
 }
-
+      
