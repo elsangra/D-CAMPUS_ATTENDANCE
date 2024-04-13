@@ -1,0 +1,30 @@
+type Error = variant { NotFound : record { msg : text } };
+type Lecture = record {
+  id : nat64;
+  number_of_partial_attendance : nat64;
+  lecturer_name : text;
+  number_of_full_attend : nat64;
+  unit_code : text;
+  unit_name : text;
+  stop_time : opt nat64;
+  start_time : nat64;
+  lecture_hall_no : nat64;
+  lecturer_id : text;
+};
+type LecturePayload = record {
+  number_of_partial_attendance : nat64;
+  lecturer_name : text;
+  number_of_full_attend : nat64;
+  unit_code : text;
+  unit_name : text;
+  lecture_hall_no : nat64;
+  lecturer_id : text;
+};
+type Result = variant { Ok : Lecture; Err : Error };
+service : {
+  create_lecture : (LecturePayload) -> (opt Lecture);
+  delete_lecture : (nat64) -> (Result);
+  finalize_lecture : (nat64, LecturePayload) -> (Result);
+  get_lecture : (nat64) -> (Result) query;
+}
+

@@ -1,0 +1,38 @@
+{
+  "canisters": {
+    "internet_identity": {
+      "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+      "frontend": {},
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz"
+    },
+    "student_attendance_backend": {
+      "candid": "src/student_attendance_backend/student_attendance_backend.did",
+      "package": "student_attendance_backend",
+      "type": "rust"
+    },
+    "student_attendance_frontend": {
+      "dependencies": [
+        "student_attendance_backend"
+      ],
+      "source": [
+        "src/student_attendance_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "student_attendance_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
